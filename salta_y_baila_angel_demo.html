@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Salta y Baila Ángel | Zumba & Kangoo Jumps</title>
+  <style>
+    :root{
+      --bg:#fff7fb;
+      --card:#ffffff;
+      --text:#25162f;
+      --muted:#7b6b83;
+      --border:#f0ddea;
+      --pink:#ec4899;
+      --pink-dark:#db2777;
+      --purple:#7c3aed;
+      --orange:#f97316;
+      --yellow:#facc15;
+      --cyan:#06b6d4;
+      --green:#22c55e;
+      --red:#ef4444;
+      --soft-pink:#fce7f3;
+      --soft-purple:#ede9fe;
+      --soft-orange:#ffedd5;
+      --soft-cyan:#cffafe;
+      --shadow:0 24px 60px rgba(124,58,237,.15);
+      --radius:26px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(236,72,153,.25), transparent 30%),
+        radial-gradient(circle at top right, rgba(6,182,212,.22), transparent 32%),
+        linear-gradient(135deg,#fff7fb 0%,#f8f1ff 45%,#ecfeff 100%);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .hidden{display:none!important}
+
+    .login-screen{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+
+    .login-card{
+      width:min(1120px,100%);
+      display:grid;
+      grid-template-columns:1.1fr 430px;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.75);
+      border-radius:36px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .login-hero{
+      position:relative;
+      overflow:hidden;
+      padding:52px;
+      background:linear-gradient(135deg,#7c3aed,#ec4899 55%,#f97316);
+      color:white;
+    }
+
+    .login-hero:before,.login-hero:after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      background:rgba(255,255,255,.16);
+    }
+
+    .login-hero:before{width:300px;height:300px;right:-80px;top:-70px}
+    .login-hero:after{width:230px;height:230px;left:-80px;bottom:-70px}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      position:relative;
+      z-index:1;
+    }
+
+    .logo{
+      width:54px;height:54px;
+      border-radius:19px;
+      display:grid;
+      place-items:center;
+      background:white;
+      color:#ec4899;
+      font-size:28px;
+      box-shadow:0 16px 35px rgba(0,0,0,.12);
+    }
+
+    .brand h1{margin:0;font-size:24px;letter-spacing:-.03em}
+    .brand p{margin:2px 0 0;color:#ffe4f2;font-size:13px}
+
+    .login-hero h2{
+      position:relative;
+      z-index:1;
+      margin:42px 0 16px;
+      font-size:50px;
+      line-height:1;
+      letter-spacing:-.06em;
+    }
+
+    .login-hero p{
+      position:relative;
+      z-index:1;
+      font-size:18px;
+      line-height:1.6;
+      color:#fff7ed;
+      max-width:620px;
+    }
+
+    .badges{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:28px;
+    }
+
+    .badges span{
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.24);
+      padding:10px 13px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .login-form{
+      padding:42px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .tabs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      background:#fdf2f8;
+      border-radius:18px;
+      padding:6px;
+      margin-bottom:24px;
+    }
+
+    .tabs button{
+      border:0;
+      border-radius:13px;
+      padding:11px;
+      background:transparent;
+      color:var(--muted);
+      font-weight:900;
+    }
+
+    .tabs button.active{
+      background:white;
+      color:var(--pink);
+      box-shadow:0 8px 20px rgba(236,72,153,.13);
+    }
+
+    .login-form h2{
+      margin:0 0 8px;
+      font-size:28px;
+      letter-spacing:-.04em;
+    }
+
+    .login-form p{
+      margin:0 0 22px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    label{
+      display:block;
+      font-weight:850;
+      font-size:14px;
+      margin:0 0 7px;
+    }
+
+    input,select{
+      width:100%;
+      border:1px solid var(--border);
+      background:white;
+      padding:13px 14px;
+      border-radius:15px;
+      outline:none;
+      color:var(--text);
+    }
+
+    input:focus,select:focus{
+      border-color:var(--pink);
+      box-shadow:0 0 0 4px rgba(236,72,153,.1);
+    }
+
+    .field{margin-bottom:15px}
+    .hint{font-size:12px;color:var(--muted);line-height:1.45;margin-top:8px}
+
+    .btn{
+      border:0;
+      border-radius:16px;
+      padding:13px 18px;
+      font-weight:950;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      transition:.18s ease;
+      text-decoration:none;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--pink),var(--purple));
+      color:white;
+      box-shadow:0 16px 28px rgba(236,72,153,.24);
+    }
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-orange{background:linear-gradient(135deg,var(--orange),var(--yellow));color:#431407}
+    .btn-light{background:#fff;color:#5b4169;border:1px solid var(--border)}
+    .btn-purple{background:var(--soft-purple);color:#5b21b6}
+    .btn-pink{background:var(--soft-pink);color:#be185d}
+    .btn-cyan{background:var(--soft-cyan);color:#0e7490}
+    .btn-green{background:#dcfce7;color:#166534}
+    .btn-red{background:#fee2e2;color:#991b1b}
+    .btn-full{width:100%}
+
+    .app{
+      display:grid;
+      grid-template-columns:300px 1fr;
+      min-height:100vh;
+    }
+
+    .sidebar{
+      background:#21102d;
+      color:white;
+      padding:28px 22px;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    .sidebar .logo{background:linear-gradient(135deg,var(--pink),var(--orange));color:white}
+
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .nav button{
+      border:0;
+      border-radius:16px;
+      padding:13px 14px;
+      background:transparent;
+      color:#f5d0fe;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:100%;
+      font-size:15px;
+    }
+
+    .nav button.active,.nav button:hover{
+      background:rgba(255,255,255,.12);
+      color:white;
+    }
+
+    .sidebar-card{
+      margin-top:auto;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:22px;
+      padding:17px;
+    }
+
+    .sidebar-card strong{display:block;margin-bottom:7px}
+    .sidebar-card p{margin:0;color:#f5d0fe;font-size:13px;line-height:1.45}
+
+    main{
+      padding:32px;
+      overflow:auto;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:26px;
+    }
+
+    .topbar h2{
+      margin:0;
+      font-size:32px;
+      letter-spacing:-.05em;
+    }
+
+    .topbar p{
+      margin:7px 0 0;
+      color:var(--muted);
+    }
+
+    .user-pill{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 12px 30px rgba(124,58,237,.08);
+      white-space:nowrap;
+    }
+
+    .avatar{
+      width:34px;height:34px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--pink),var(--orange));
+      display:grid;
+      place-items:center;
+      color:white;
+      font-weight:950;
+    }
+
+    .section{display:none}
+    .section.active{display:block}
+
+    .grid{display:grid;gap:20px}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+
+    .card{
+      background:rgba(255,255,255,.9);
+      border:1px solid rgba(255,255,255,.75);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:0 15px 35px rgba(124,58,237,.08);
+    }
+
+    .hero{
+      background:
+        radial-gradient(circle at right, rgba(250,204,21,.3), transparent 27%),
+        linear-gradient(135deg,#ffffff,#fdf2f8 48%,#ecfeff);
+      border:1px solid #fbcfe8;
+      border-radius:32px;
+      padding:30px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:22px;
+      align-items:center;
+      margin-bottom:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero h3{
+      margin:0 0 9px;
+      font-size:30px;
+      letter-spacing:-.05em;
+    }
+
+    .hero p{margin:0;color:var(--muted);line-height:1.55}
+
+    .stat{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .stat-icon{
+      width:52px;height:52px;
+      border-radius:19px;
+      display:grid;
+      place-items:center;
+      font-size:25px;
+    }
+    .bg-pink{background:var(--soft-pink)}
+    .bg-purple{background:var(--soft-purple)}
+    .bg-orange{background:var(--soft-orange)}
+    .bg-cyan{background:var(--soft-cyan)}
+
+    .stat h4{margin:0;font-size:24px}
+    .stat p{margin:3px 0 0;color:var(--muted);font-size:13px}
+
+    .class-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      padding:22px;
+      color:white;
+      min-height:230px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      box-shadow:0 22px 45px rgba(236,72,153,.14);
+    }
+
+    .class-card.zumba{background:linear-gradient(135deg,#ec4899,#f97316)}
+    .class-card.kangoo{background:linear-gradient(135deg,#7c3aed,#06b6d4)}
+    .class-card:after{
+      content:"";
+      position:absolute;
+      width:190px;height:190px;
+      border-radius:50%;
+      background:rgba(255,255,255,.15);
+      right:-60px;top:-70px;
+    }
+
+    .class-card h3{
+      margin:0 0 6px;
+      font-size:27px;
+      letter-spacing:-.04em;
+      position:relative;z-index:1;
+    }
+
+    .class-card p{
+      margin:0;
+      color:rgba(255,255,255,.86);
+      line-height:1.5;
+      position:relative;z-index:1;
+    }
+
+    .class-meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:16px;
+      position:relative;z-index:1;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      font-weight:900;
+      background:rgba(255,255,255,.18);
+      color:white;
+    }
+
+    .tag{
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      font-weight:950;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+
+    .tag.pink{background:var(--soft-pink);color:#be185d}
+    .tag.purple{background:var(--soft-purple);color:#5b21b6}
+    .tag.orange{background:var(--soft-orange);color:#9a3412}
+    .tag.cyan{background:var(--soft-cyan);color:#0e7490}
+    .tag.green{background:#dcfce7;color:#166534}
+    .tag.red{background:#fee2e2;color:#991b1b}
+
+    .list{display:flex;flex-direction:column;gap:12px}
+
+    .list-item{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .class-row{
+      display:grid;
+      grid-template-columns:64px 1fr auto;
+      gap:14px;
+      align-items:center;
+      background:white;
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:14px;
+    }
+
+    .time{
+      width:64px;height:64px;
+      border-radius:20px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      font-weight:950;
+      line-height:1.1;
+      background:#fdf2f8;
+      color:#be185d;
+    }
+
+    .class-row h4{margin:0 0 5px;font-size:17px}
+    .class-row p{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
+
+    .progress{
+      height:10px;
+      border-radius:999px;
+      background:#f1e3f0;
+      overflow:hidden;
+      margin-top:10px;
+    }
+
+    .progress span{
+      display:block;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--pink),var(--orange));
+    }
+
+    .plan{
+      border:2px solid transparent;
+      background:white;
+      border-radius:28px;
+      padding:24px;
+      box-shadow:0 15px 35px rgba(124,58,237,.07);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .plan.featured{
+      border-color:#f9a8d4;
+      transform:translateY(-4px);
+    }
+
+    .plan.featured:before{
+      content:"Más popular";
+      position:absolute;
+      top:16px;right:16px;
+      background:linear-gradient(135deg,var(--pink),var(--orange));
+      color:white;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:950;
+    }
+
+    .plan h3{margin:0 0 8px;font-size:22px}
+    .price{
+      font-size:38px;
+      font-weight:1000;
+      letter-spacing:-.05em;
+      margin:14px 0;
+    }
+    .price small{font-size:14px;color:var(--muted);letter-spacing:0;font-weight:700}
+
+    .plan ul{
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
+      margin:12px 0 20px;
+    }
+
+    .calendar{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:12px;
+    }
+
+    .day{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:14px;
+      min-height:180px;
+    }
+
+    .day strong{display:block;margin-bottom:10px}
+    .mini-class{
+      border-radius:15px;
+      padding:10px;
+      margin-bottom:8px;
+      color:white;
+      font-size:12px;
+      line-height:1.35;
+      cursor:pointer;
+    }
+    .mini-class.zumba{background:linear-gradient(135deg,#ec4899,#f97316)}
+    .mini-class.kangoo{background:linear-gradient(135deg,#7c3aed,#06b6d4)}
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    th,td{
+      text-align:left;
+      padding:13px;
+      border-bottom:1px solid var(--border);
+      font-size:14px;
+      vertical-align:top;
+    }
+
+    th{color:#6b5278;background:#fff7fb}
+    tr:last-child td{border-bottom:0}
+
+    .filters{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr 1fr;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(37,22,47,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:20;
+    }
+
+    .modal{
+      background:white;
+      width:min(720px,100%);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      max-height:90vh;
+      overflow:auto;
+    }
+
+    .modal-header{
+      padding:22px 24px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .modal-header h3{margin:0}
+    .modal-body{padding:24px}
+
+    .toast{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      background:#21102d;
+      color:white;
+      padding:14px 17px;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      display:none;
+      z-index:30;
+    }
+
+    @media(max-width:1100px){
+      .grid-4,.grid-3,.calendar,.filters{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media(max-width:920px){
+      .app{grid-template-columns:1fr}
+      .sidebar{position:sticky;top:0;z-index:10;border-radius:0 0 26px 26px}
+      .nav{display:grid;grid-template-columns:repeat(2,1fr)}
+      .sidebar-card{display:none}
+      .login-card{grid-template-columns:1fr}
+      .login-hero{display:none}
+      .hero{grid-template-columns:1fr}
+      .topbar{flex-direction:column;align-items:flex-start}
+      .grid-4,.grid-3,.grid-2,.calendar,.filters{grid-template-columns:1fr}
+      .class-row{grid-template-columns:56px 1fr}
+      .class-row > div:last-child{grid-column:1/-1}
+      main{padding:20px}
+    }
+  </style>
+</head>
+<body>
+
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-hero">
+        <div class="brand">
+          <div class="logo">💃</div>
+          <div>
+            <h1>Salta y Baila Ángel</h1>
+            <p>Zumba · Kangoo Jumps · Diversión</p>
+          </div>
+        </div>
+        <h2>Salta, baila y sonríe.</h2>
+        <p>
+          Demo de aplicación para Salta y Baila Ángel: registro,
+          matrícula, reservas, pagos simulados, bonos, retos y comunidad.
+        </p>
+        <div class="badges">
+          <span>Reservas online</span>
+          <span>Pagos y bonos</span>
+          <span>Lista de espera</span>
+          <span>Retos fitness</span>
+          <span>Diseño app/web</span>
+        </div>
+      </div>
+
+      <div class="login-form">
+        <div class="tabs">
+          <button id="loginTab" class="active" onclick="switchAuth('login')">Entrar</button>
+          <button id="registerTab" onclick="switchAuth('register')">Registrarme</button>
+        </div>
+
+        <div id="loginForm">
+          <h2>Hola de nuevo 👋</h2>
+          <p>Accede a tu espacio para reservar clases y gestionar tus pagos.</p>
+          <div class="field">
+            <label>Email</label>
+            <input id="loginEmail" type="email" value="alumna@saltaybailaangel.es" placeholder="tu@email.com">
+          </div>
+          <div class="field">
+            <label>Contraseña</label>
+            <input type="password" value="demo1234" placeholder="••••••••">
+          </div>
+          <button class="btn btn-primary btn-full" onclick="login()">Entrar</button>
+          <p class="hint">Demo: puedes entrar con cualquier email.</p>
+        </div>
+
+        <div id="registerForm" class="hidden">
+          <h2>Únete al estudio ✨</h2>
+          <p>Crea tu perfil y empieza a reservar clases.</p>
+          <div class="field">
+            <label>Nombre</label>
+            <input id="regName" placeholder="Ej. Laura">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input id="regEmail" type="email" placeholder="tu@email.com">
+          </div>
+          <div class="field">
+            <label>Objetivo principal</label>
+            <select id="regGoal">
+              <option>Divertirme y moverme más</option>
+              <option>Mejorar condición física</option>
+              <option>Perder grasa</option>
+              <option>Tonificar</option>
+              <option>Probar Kangoo Jumps</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-full" onclick="register()">Crear cuenta</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="appScreen" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">💃</div>
+        <div>
+          <h1>Salta y Baila Ángel</h1>
+          <p>Tu espacio para saltar y bailar</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="active" onclick="showSection('home', this)">🏠 Inicio</button>
+        <button onclick="showSection('classes', this)">📅 Reservar clase</button>
+        <button onclick="showSection('calendar', this)">🗓️ Calendario</button>
+        <button onclick="showSection('plans', this)">💳 Matrícula y bonos</button>
+        <button onclick="showSection('payments', this)">🧾 Pagos</button>
+        <button onclick="showSection('myBookings', this)">✅ Mis reservas</button>
+        <button onclick="showSection('challenges', this)">🏆 Retos</button>
+        <button onclick="showSection('profile', this)">👤 Perfil</button>
+        <button onclick="showSection('admin', this)">📊 Panel negocio</button>
+      </nav>
+
+      <div class="sidebar-card">
+        <strong>Clase destacada</strong>
+        <p>Kangoo Power · Miércoles 19:30. Quedan pocas plazas.</p>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div>
+          <h2 id="pageTitle">Inicio</h2>
+          <p id="pageSubtitle">Reserva, paga y disfruta bailando.</p>
+        </div>
+        <div class="user-pill">
+          <div class="avatar" id="avatar">A</div>
+          <span id="userName">Alumna demo</span>
+        </div>
+      </div>
+
+      <section id="home" class="section active">
+        <div class="hero">
+          <div>
+            <h3>Hoy es buen día para saltar y bailar 🔥</h3>
+            <p>Reserva tus clases, controla tus bonos y vive la energía de Salta y Baila Ángel.</p>
+          </div>
+          <button class="btn btn-primary" onclick="showSectionById('classes')">Reservar ahora</button>
+        </div>
+
+        <div class="grid grid-4">
+          <div class="card stat"><div class="stat-icon bg-pink">🎟️</div><div><h4 id="creditsStat">4</h4><p>Créditos disponibles</p></div></div>
+          <div class="card stat"><div class="stat-icon bg-purple">✅</div><div><h4 id="bookingsStat">0</h4><p>Reservas activas</p></div></div>
+          <div class="card stat"><div class="stat-icon bg-orange">🔥</div><div><h4>7</h4><p>Días de racha</p></div></div>
+          <div class="card stat"><div class="stat-icon bg-cyan">🏆</div><div><h4>2</h4><p>Retos activos</p></div></div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Programa de fidelización Ángel Stars ⭐</h3>
+          <p style="color:var(--muted);line-height:1.55">Gana puntos por cada asistencia y canjéalos por premios: clases gratis, descuentos, camisetas y eventos especiales.</p>
+          <div class="grid grid-3">
+            <div class="list-item"><span>20 puntos</span><span class="tag green">Clase gratis</span></div>
+            <div class="list-item"><span>50 puntos</span><span class="tag pink">Camiseta</span></div>
+            <div class="list-item"><span>100 puntos</span><span class="tag orange">Mes gratis</span></div>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:20px">
+          <div class="class-card zumba">
+            <div>
+              <h3>Zumba Energy</h3>
+              <p>Cardio, música latina y buen rollo para todos los niveles.</p>
+              <div class="class-meta">
+                <span class="chip">💃 45 min</span><span class="chip">🔥 Intensidad media</span><span class="chip">🎵 Música latina</span>
+              </div>
+            </div>
+            <button class="btn btn-light" onclick="quickClass('Zumba Energy')">Ver clases</button>
+          </div>
+
+          <div class="class-card kangoo">
+            <div>
+              <h3>Kangoo Jumps</h3>
+              <p>Entrenamiento con botas de rebote: divertido, intenso y diferente.</p>
+              <div class="class-meta">
+                <span class="chip">🦘 50 min</span><span class="chip">⚡ Alta energía</span><span class="chip">👟 Botas incluidas</span>
+              </div>
+            </div>
+            <button class="btn btn-light" onclick="quickClass('Kangoo Power')">Ver clases</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Próximas clases populares</h3>
+          <div id="popularClasses" class="list"></div>
+        </div>
+      </section>
+
+      <section id="classes" class="section">
+        <div class="card">
+          <div class="filters">
+            <input id="classSearch" placeholder="Buscar clase, monitor/a..." oninput="renderClasses()">
+            <select id="classType" onchange="renderClasses()">
+              <option value="">Todas las clases</option>
+              <option>Zumba</option>
+              <option>Kangoo</option>
+            </select>
+            <select id="classLevel" onchange="renderClasses()">
+              <option value="">Todos los niveles</option>
+              <option>Inicial</option>
+              <option>Medio</option>
+              <option>Intenso</option>
+            </select>
+            <select id="classDay" onchange="renderClasses()">
+              <option value="">Todos los días</option>
+              <option>Lunes</option>
+              <option>Martes</option>
+              <option>Miércoles</option>
+              <option>Jueves</option>
+              <option>Viernes</option>
+              <option>Sábado</option>
+            </select>
+          </div>
+
+          <div id="classesList" class="list"></div>
+        </div>
+      </section>
+
+      <section id="calendar" class="section">
+        <div class="card">
+          <h3>Calendario semanal</h3>
+          <p style="color:var(--muted)">Pulsa sobre una clase para reservar.</p>
+          <div id="calendarGrid" class="calendar"></div>
+        </div>
+      </section>
+
+      <section id="plans" class="section">
+        <div class="grid grid-3">
+          <div class="plan">
+            <h3>Clase suelta</h3>
+            <p style="color:var(--muted)">Para probar sin compromiso.</p>
+            <div class="price">9€</div>
+            <ul>
+              <li>1 clase</li>
+              <li>Reserva online</li>
+              <li>Válida 30 días</li>
+            </ul>
+            <button class="btn btn-pink btn-full" onclick="buyPlan('Clase suelta',9,1)">Comprar</button>
+          </div>
+
+          <div class="plan featured">
+            <h3>Bono 8 clases</h3>
+            <p style="color:var(--muted)">Ideal para entrenar cada semana.</p>
+            <div class="price">55€ <small>/ 8 clases</small></div>
+            <ul>
+              <li>8 créditos de reserva</li>
+              <li>Zumba y Kangoo incluidos</li>
+              <li>Válido 60 días</li>
+            </ul>
+            <button class="btn btn-primary btn-full" onclick="buyPlan('Bono 8 clases',55,8)">Comprar</button>
+          </div>
+
+          <div class="plan">
+            <h3>Mensual ilimitado</h3>
+            <p style="color:var(--muted)">Para venir todo lo que quieras.</p>
+            <div class="price">69€ <small>/ mes</small></div>
+            <ul>
+              <li>Reservas ilimitadas</li>
+              <li>Prioridad en Kangoo</li>
+              <li>Retos y eventos incluidos</li>
+            </ul>
+            <button class="btn btn-purple btn-full" onclick="buyPlan('Mensual ilimitado',69,99)">Matricularme</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Matrícula inicial</h3>
+          <p style="color:var(--muted);line-height:1.55">Alta en Salta y Baila Ángel, perfil de salud básico, acceso a reservas, comunidad y promociones.</p>
+          <div class="list-item">
+            <div><strong>Matrícula Salta y Baila</strong><br><span style="color:var(--muted)">Pago único de alta</span></div>
+            <div style="display:flex;align-items:center;gap:10px"><strong>15€</strong><button class="btn btn-orange" onclick="buyPlan('Matrícula Salta y Baila',15,0)">Pagar matrícula</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="payments" class="section">
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Pago simulado</h3>
+            <div class="field">
+              <label>Concepto</label>
+              <input id="payConcept" value="Bono 8 clases">
+            </div>
+            <div class="field">
+              <label>Importe</label>
+              <input id="payAmount" type="number" value="55">
+            </div>
+            <div class="field">
+              <label>Método de pago</label>
+              <select id="payMethod">
+                <option>Tarjeta</option>
+                <option>Bizum</option>
+                <option>Transferencia</option>
+                <option>Efectivo en estudio</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="payNow()">Pagar ahora</button>
+            <p class="hint">Demo: no se realiza ningún pago real.</p>
+          </div>
+
+          <div class="card">
+            <h3>Historial de pagos</h3>
+            <div id="paymentsList" class="list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="myBookings" class="section">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+            <div>
+              <h3>Mis reservas</h3>
+              <p style="color:var(--muted)">Consulta y cancela tus próximas clases.</p>
+            </div>
+            <button class="btn btn-primary" onclick="showSectionById('classes')">Reservar otra clase</button>
+          </div>
+          <div id="bookingsList" class="list"></div>
+        </div>
+      </section>
+
+      <section id="challenges" class="section">
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Reto 8 clases</h3>
+            <p style="color:var(--muted)">Completa 8 clases este mes.</p>
+            <div class="progress"><span id="challenge8" style="width:0%"></span></div>
+            <p class="hint"><span id="challengeText">0</span>/8 clases completadas o reservadas.</p>
+            <button class="btn btn-pink btn-full">Participando</button>
+          </div>
+          <div class="card">
+            <h3>Kangoo Starter</h3>
+            <p style="color:var(--muted)">Prueba 3 clases de Kangoo Jumps.</p>
+            <div class="progress"><span id="challengeKangoo" style="width:0%"></span></div>
+            <p class="hint"><span id="kangooText">0</span>/3 clases Kangoo.</p>
+            <button class="btn btn-purple btn-full">Reto activo</button>
+          </div>
+          <div class="card">
+            <h3>Trae a una amiga</h3>
+            <p style="color:var(--muted)">Invita a alguien y ganad ambas una clase extra.</p>
+            <button class="btn btn-orange btn-full" onclick="toast('Invitación demo copiada ✨')">Copiar invitación</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile" class="section">
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Mi perfil</h3>
+            <div class="field">
+              <label>Nombre</label>
+              <input id="profileName">
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input id="profileEmail">
+            </div>
+            <div class="field">
+              <label>Objetivo</label>
+              <select id="profileGoal">
+                <option>Divertirme y moverme más</option>
+                <option>Mejorar condición física</option>
+                <option>Perder grasa</option>
+                <option>Tonificar</option>
+                <option>Probar Kangoo Jumps</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Talla de bota Kangoo Jumps</label>
+              <select id="profileBootSize">
+                <option>No indicada</option>
+                <option>35-36</option>
+                <option>37-38</option>
+                <option>39-40</option>
+                <option>41-42</option>
+                <option>43-44</option>
+              </select>
+              <p class="hint">Se usará para reservar automáticamente tus botas en las clases Kangoo.</p>
+            </div>
+            <button class="btn btn-primary" onclick="saveProfile()">Guardar perfil</button>
+          </div>
+
+          <div class="card">
+            <h3>Preferencias</h3>
+            <div class="list">
+              <div class="list-item"><span>Recordatorio 2 horas antes</span><span class="tag green">Activo</span></div>
+              <div class="list-item"><span>Notificaciones de plazas libres</span><span class="tag green">Activo</span></div>
+              <div class="list-item"><span>Promociones y eventos</span><span class="tag pink">Sí</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="admin" class="section">
+        <div class="grid grid-4">
+          <div class="card stat"><div class="stat-icon bg-pink">👥</div><div><h4 id="adminUsers">128</h4><p>Alumnas/os</p></div></div>
+          <div class="card stat"><div class="stat-icon bg-purple">✅</div><div><h4 id="adminBookings">0</h4><p>Reservas demo</p></div></div>
+          <div class="card stat"><div class="stat-icon bg-orange">💳</div><div><h4 id="adminIncome">0€</h4><p>Ingresos demo</p></div></div>
+          <div class="card stat"><div class="stat-icon bg-cyan">🎟️</div><div><h4 id="adminOccupancy">0%</h4><p>Ocupación demo</p></div></div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:20px">
+          <div class="card">
+            <h3>Reservas por tipo</h3>
+            <div id="bookingChart" class="list"></div>
+          </div>
+          <div class="card">
+            <h3>Ideas extra para el negocio</h3>
+            <div class="list">
+              <div class="list-item"><span>Lista de espera automática</span><span class="tag purple">Pro</span></div>
+              <div class="list-item"><span>Códigos descuento</span><span class="tag pink">Marketing</span></div>
+              <div class="list-item"><span>Eventos especiales</span><span class="tag orange">Comunidad</span></div>
+              <div class="list-item"><span>Control de asistencia con QR</span><span class="tag cyan">App móvil</span></div>
+              <div class="list-item"><span>Reserva automática de tallas Kangoo</span><span class="tag purple">Diferencial</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Base de datos demo del negocio</h3>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr><th>Clase</th><th>Día</th><th>Hora</th><th>Talla botas</th><th>Reserva</th><th>Estado</th></tr>
+              </thead>
+              <tbody id="adminTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <div id="classModal" class="modal-backdrop" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalTitle">Reservar clase</h3>
+        <button class="btn btn-light" onclick="closeModal()">Cerrar</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    let user = JSON.parse(localStorage.getItem('saltaybaila_user') || '{"name":"Alumna demo","email":"alumna@saltaybailaangel.es","goal":"Divertirme y moverme más","credits":4,"bootSize":"37-38","points":12}');
+    const classes = [
+      {id:1,type:"Zumba",name:"Zumba Energy",day:"Lunes",time:"18:30",duration:"45 min",level:"Medio",coach:"Nerea",capacity:18,booked:12,price:1,desc:"Coreografías latinas, cardio y diversión."},
+      {id:2,type:"Kangoo",name:"Kangoo Power",day:"Lunes",time:"19:30",duration:"50 min",level:"Intenso",coach:"Claudia",capacity:12,booked:10,price:1,desc:"Clase intensa con botas de rebote incluidas."},
+      {id:3,type:"Zumba",name:"Zumba Gold",day:"Martes",time:"10:00",duration:"45 min",level:"Inicial",coach:"Marta",capacity:16,booked:8,price:1,desc:"Ritmo suave, fácil y muy divertido."},
+      {id:4,type:"Kangoo",name:"Kangoo Starter",day:"Miércoles",time:"18:00",duration:"45 min",level:"Inicial",coach:"Claudia",capacity:10,booked:6,price:1,desc:"Perfecta para aprender técnica y seguridad."},
+      {id:5,type:"Zumba",name:"Zumba Party",day:"Miércoles",time:"19:30",duration:"50 min",level:"Medio",coach:"Nerea",capacity:22,booked:18,price:1,desc:"La clase más fiestera de la semana."},
+      {id:6,type:"Kangoo",name:"Kangoo Burn",day:"Jueves",time:"20:00",duration:"50 min",level:"Intenso",coach:"Laura",capacity:12,booked:12,price:1,desc:"Alta intensidad y mucha energía."},
+      {id:7,type:"Zumba",name:"Zumba Weekend",day:"Sábado",time:"11:00",duration:"60 min",level:"Medio",coach:"Marta",capacity:25,booked:15,price:1,desc:"Sesión especial de fin de semana."},
+      {id:8,type:"Kangoo",name:"Kangoo Fun",day:"Viernes",time:"18:30",duration:"45 min",level:"Medio",coach:"Laura",capacity:12,booked:7,price:1,desc:"Rebote, música y descarga de estrés."}
+    ];
+
+    const titles = {
+      home:["Inicio","Reserva, paga y disfruta bailando."],
+      classes:["Reservar clase","Elige clase, horario y asegura tu plaza."],
+      calendar:["Calendario","Vista semanal de clases disponibles."],
+      plans:["Matrícula y bonos","Compra clases sueltas, bonos o mensualidades."],
+      payments:["Pagos","Simulación de pagos e historial."],
+      myBookings:["Mis reservas","Gestiona tus próximas clases."],
+      challenges:["Retos","Motivación, rachas y objetivos."],
+      profile:["Perfil","Tus datos y preferencias."],
+      admin:["Panel negocio","Indicadores básicos para gestionar el estudio."]
+    };
+
+    function switchAuth(mode){
+      document.getElementById('loginTab').classList.toggle('active', mode==='login');
+      document.getElementById('registerTab').classList.toggle('active', mode==='register');
+      document.getElementById('loginForm').classList.toggle('hidden', mode!=='login');
+      document.getElementById('registerForm').classList.toggle('hidden', mode!=='register');
+    }
+
+    function login(){
+      const email = document.getElementById('loginEmail').value || user.email;
+      user.email = email;
+      saveUser();
+      enterApp();
+    }
+
+    function register(){
+      user.name = document.getElementById('regName').value || 'Nueva alumna';
+      user.email = document.getElementById('regEmail').value || 'nueva@moveup.es';
+      user.goal = document.getElementById('regGoal').value;
+      user.credits = 1;
+      user.bootSize = 'No indicada';
+      user.points = 0;
+      saveUser();
+      enterApp();
+    }
+
+    function enterApp(){
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('appScreen').classList.remove('hidden');
+      loadProfile();
+      refreshAll();
+    }
+
+    function saveUser(){
+      localStorage.setItem('saltaybaila_user', JSON.stringify(user));
+    }
+
+    function showSection(id, btn){
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+      if(btn) btn.classList.add('active');
+      document.getElementById('pageTitle').textContent = titles[id][0];
+      document.getElementById('pageSubtitle').textContent = titles[id][1];
+      refreshAll();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function showSectionById(id){
+      const buttons = [...document.querySelectorAll('.nav button')];
+      const matching = buttons.find(b => b.getAttribute('onclick')?.includes("'" + id + "'"));
+      showSection(id, matching);
+    }
+
+    function getBookings(){ return JSON.parse(localStorage.getItem('saltaybaila_bookings') || '[]'); }
+    function setBookings(x){ localStorage.setItem('saltaybaila_bookings', JSON.stringify(x)); }
+    function getPayments(){ return JSON.parse(localStorage.getItem('saltaybaila_payments') || '[]'); }
+    function setPayments(x){ localStorage.setItem('saltaybaila_payments', JSON.stringify(x)); }
+
+    function renderClasses(){
+      const search = (document.getElementById('classSearch')?.value || '').toLowerCase();
+      const type = document.getElementById('classType')?.value || '';
+      const level = document.getElementById('classLevel')?.value || '';
+      const day = document.getElementById('classDay')?.value || '';
+      const bookings = getBookings();
+      const rows = classes.filter(c =>
+        (!search || JSON.stringify(c).toLowerCase().includes(search)) &&
+        (!type || c.type === type) &&
+        (!level || c.level === level) &&
+        (!day || c.day === day)
+      );
+
+      document.getElementById('classesList').innerHTML = rows.map(c => {
+        const currentBooked = c.booked + bookings.filter(b=>b.classId===c.id && b.status==="Reservada").length;
+        const full = currentBooked >= c.capacity;
+        const pct = Math.min(100, Math.round(currentBooked/c.capacity*100));
+        const bookedByUser = bookings.some(b=>b.classId===c.id && b.status==="Reservada");
+        return `
+          <div class="class-row">
+            <div class="time">${c.day.slice(0,3)}<br>${c.time}</div>
+            <div>
+              <h4>${c.type === 'Zumba' ? '💃' : '🦘'} ${c.name}</h4>
+              <p>${c.desc}<br>${c.coach} · ${c.duration} · Nivel ${c.level} · ${currentBooked}/${c.capacity} plazas</p>
+              <div class="progress"><span style="width:${pct}%"></span></div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+              <span class="tag ${c.type==='Zumba'?'pink':'purple'}">${c.type}</span>
+              ${bookedByUser ? '<span class="tag green">Reservada</span>' : full ? '<span class="tag red">Completa</span>' : '<span class="tag cyan">Disponible</span>'}
+              <button class="btn ${full && !bookedByUser ? 'btn-orange' : 'btn-primary'}" onclick="openClass(${c.id})">${full && !bookedByUser ? 'Lista espera' : 'Reservar'}</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderPopular(){
+      document.getElementById('popularClasses').innerHTML = classes.slice(0,4).map(c=>`
+        <div class="list-item">
+          <div><strong>${c.type==='Zumba'?'💃':'🦘'} ${c.name}</strong><br><span style="color:var(--muted)">${c.day} · ${c.time} · ${c.coach}</span></div>
+          <button class="btn btn-light" onclick="openClass(${c.id})">Reservar</button>
+        </div>
+      `).join('');
+    }
+
+    function renderCalendar(){
+      const days = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+      document.getElementById('calendarGrid').innerHTML = days.map(d => {
+        const dayClasses = classes.filter(c=>c.day===d);
+        return `
+          <div class="day">
+            <strong>${d}</strong>
+            ${dayClasses.length ? dayClasses.map(c=>`
+              <div class="mini-class ${c.type==='Zumba'?'zumba':'kangoo'}" onclick="openClass(${c.id})">
+                <strong>${c.time} · ${c.name}</strong><br>${c.coach} · ${c.level}
+              </div>
+            `).join('') : '<span style="color:var(--muted);font-size:13px">Sin clases</span>'}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openClass(id){
+      const c = classes.find(x=>x.id===id);
+      const bookings = getBookings();
+      const currentBooked = c.booked + bookings.filter(b=>b.classId===c.id && b.status==="Reservada").length;
+      const full = currentBooked >= c.capacity;
+      document.getElementById('modalTitle').textContent = c.name;
+      document.getElementById('modalBody').innerHTML = `
+        <div class="class-card ${c.type==='Zumba'?'zumba':'kangoo'}" style="min-height:180px;margin-bottom:18px">
+          <div>
+            <h3>${c.type==='Zumba'?'💃':'🦘'} ${c.name}</h3>
+            <p>${c.desc}</p>
+            <div class="class-meta">
+              <span class="chip">${c.day} ${c.time}</span>
+              <span class="chip">${c.duration}</span>
+              <span class="chip">Nivel ${c.level}</span>
+              <span class="chip">${c.coach}</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card" style="box-shadow:none">
+            <strong>Plazas</strong>
+            <p style="color:var(--muted)">${currentBooked}/${c.capacity} ocupadas</p>
+            <div class="progress"><span style="width:${Math.min(100,Math.round(currentBooked/c.capacity*100))}%"></span></div>
+          </div>
+          <div class="card" style="box-shadow:none">
+            <strong>Coste</strong>
+            <p style="color:var(--muted)">1 crédito de tu bono</p>
+            <span class="tag ${user.credits>0?'green':'red'}">${user.credits} créditos disponibles</span>
+            ${c.type === 'Kangoo' ? `<p class="hint">Talla de botas reservada: <strong>${user.bootSize || 'No indicada'}</strong></p>` : ''}
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <button class="btn btn-primary" onclick="bookClass(${c.id})">${full ? 'Apuntarme a lista de espera' : 'Confirmar reserva'}</button>
+          <button class="btn btn-light" onclick="closeModal()">Cancelar</button>
+        </div>
+      `;
+      document.getElementById('classModal').style.display = 'flex';
+    }
+
+    function bookClass(id){
+      const c = classes.find(x=>x.id===id);
+      const bookings = getBookings();
+      if(bookings.some(b=>b.classId===id && b.status==="Reservada")){
+        toast('Ya tienes esta clase reservada');
+        closeModal();
+        return;
+      }
+      const currentBooked = c.booked + bookings.filter(b=>b.classId===id && b.status==="Reservada").length;
+      const full = currentBooked >= c.capacity;
+      if(!full && user.credits <= 0){
+        toast('No tienes créditos. Compra un bono para reservar.');
+        closeModal();
+        showSectionById('plans');
+        return;
+      }
+      if(!full) {
+        user.credits -= 1;
+        user.points = Number(user.points || 0) + 1;
+      }
+      bookings.unshift({
+        id:Date.now(),
+        classId:id,
+        name:c.name,
+        type:c.type,
+        day:c.day,
+        time:c.time,
+        coach:c.coach,
+        status: full ? "Lista de espera" : "Reservada",
+        bootSize: c.type === 'Kangoo' ? (user.bootSize || 'No indicada') : '',
+        createdAt:new Date().toISOString()
+      });
+      setBookings(bookings);
+      saveUser();
+      closeModal();
+      refreshAll();
+      toast(full ? 'Te hemos añadido a la lista de espera ✨' : 'Reserva confirmada 🎉');
+    }
+
+    function cancelBooking(id){
+      const bookings = getBookings();
+      const b = bookings.find(x=>x.id===id);
+      if(!b) return;
+      if(confirm('¿Cancelar esta reserva?')){
+        b.status = "Cancelada";
+        if(b.status !== "Lista de espera") user.credits += 1;
+        setBookings(bookings);
+        saveUser();
+        refreshAll();
+        toast('Reserva cancelada');
+      }
+    }
+
+    function renderBookings(){
+      const bookings = getBookings();
+      document.getElementById('bookingsStat').textContent = bookings.filter(b=>b.status==="Reservada").length;
+      document.getElementById('creditsStat').textContent = user.credits;
+
+      const active = bookings.filter(b=>b.status!=="Cancelada");
+      document.getElementById('bookingsList').innerHTML = active.length ? active.map(b=>`
+        <div class="list-item">
+          <div><strong>${b.type==='Zumba'?'💃':'🦘'} ${b.name}</strong><br><span style="color:var(--muted)">${b.day} · ${b.time} · ${b.coach}</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="tag ${b.status==='Reservada'?'green':'orange'}">${b.status}</span>
+            <button class="btn btn-red" onclick="cancelBooking(${b.id})">Cancelar</button>
+          </div>
+        </div>
+      `).join('') : `<div class="list-item"><span>No tienes reservas activas.</span><button class="btn btn-primary" onclick="showSectionById('classes')">Reservar</button></div>`;
+    }
+
+    function buyPlan(concept, amount, credits){
+      document.getElementById('payConcept').value = concept;
+      document.getElementById('payAmount').value = amount;
+      showSectionById('payments');
+      toast('Concepto preparado para pago');
+    }
+
+    function payNow(){
+      const concept = document.getElementById('payConcept').value || 'Pago Salta y Baila';
+      const amount = Number(document.getElementById('payAmount').value || 0);
+      const method = document.getElementById('payMethod').value;
+      const credits = concept.includes('8') ? 8 : concept.includes('suelta') ? 1 : concept.includes('ilimitado') ? 99 : 0;
+      user.credits += credits;
+      saveUser();
+      const payments = getPayments();
+      payments.unshift({id:Date.now(),concept,amount,method,status:"Pagado",date:new Date().toLocaleString()});
+      setPayments(payments);
+      refreshAll();
+      toast('Pago simulado realizado 💳');
+    }
+
+    function renderPayments(){
+      const payments = getPayments();
+      document.getElementById('paymentsList').innerHTML = payments.length ? payments.map(p=>`
+        <div class="list-item">
+          <div><strong>${p.concept}</strong><br><span style="color:var(--muted)">${p.date} · ${p.method}</span></div>
+          <div><strong>${p.amount}€</strong> <span class="tag green">${p.status}</span></div>
+        </div>
+      `).join('') : '<div class="list-item"><span>No hay pagos todavía.</span></div>';
+    }
+
+    function renderChallenges(){
+      const bookings = getBookings().filter(b=>b.status==="Reservada");
+      const total = bookings.length;
+      const kangoo = bookings.filter(b=>b.type==="Kangoo").length;
+      document.getElementById('challenge8').style.width = Math.min(100,total/8*100)+'%';
+      document.getElementById('challengeText').textContent = total;
+      document.getElementById('challengeKangoo').style.width = Math.min(100,kangoo/3*100)+'%';
+      document.getElementById('kangooText').textContent = kangoo;
+    }
+
+    function loadProfile(){
+      document.getElementById('userName').textContent = user.name;
+      document.getElementById('avatar').textContent = user.name.charAt(0).toUpperCase();
+      document.getElementById('profileName').value = user.name;
+      document.getElementById('profileEmail').value = user.email;
+      document.getElementById('profileGoal').value = user.goal;
+      document.getElementById('profileBootSize').value = user.bootSize || 'No indicada';
+    }
+
+    function saveProfile(){
+      user.name = document.getElementById('profileName').value || user.name;
+      user.email = document.getElementById('profileEmail').value || user.email;
+      user.goal = document.getElementById('profileGoal').value;
+      user.bootSize = document.getElementById('profileBootSize').value;
+      saveUser();
+      loadProfile();
+      toast('Perfil guardado ✨');
+    }
+
+    function renderAdmin(){
+      const bookings = getBookings();
+      const payments = getPayments();
+      const active = bookings.filter(b=>b.status==="Reservada");
+      const income = payments.reduce((a,b)=>a + Number(b.amount || 0),0);
+      document.getElementById('adminBookings').textContent = active.length;
+      document.getElementById('adminIncome').textContent = income + '€';
+      document.getElementById('adminOccupancy').textContent = Math.min(100, Math.round(active.length / 10 * 100)) + '%';
+
+      const zumba = active.filter(b=>b.type==="Zumba").length;
+      const kangoo = active.filter(b=>b.type==="Kangoo").length;
+      document.getElementById('bookingChart').innerHTML = `
+        <div class="list-item"><span>💃 Zumba</span><strong>${zumba} reservas</strong></div>
+        <div class="list-item"><span>🦘 Kangoo Jumps</span><strong>${kangoo} reservas</strong></div>
+      `;
+
+      document.getElementById('adminTable').innerHTML = bookings.length ? bookings.map(b=>`
+        <tr><td>${b.name}</td><td>${b.day}</td><td>${b.time}</td><td>${b.type === 'Kangoo' ? (b.bootSize || user.bootSize || 'No indicada') : '-'}</td><td>${b.createdAt ? new Date(b.createdAt).toLocaleString() : ''}</td><td>${b.status}</td></tr>
+      `).join('') : '<tr><td colspan="5">Sin reservas demo todavía.</td></tr>';
+    }
+
+    function quickClass(name){
+      showSectionById('classes');
+      setTimeout(()=>{
+        document.getElementById('classSearch').value = name;
+        renderClasses();
+      },0);
+    }
+
+    function closeModal(e){
+      document.getElementById('classModal').style.display = 'none';
+    }
+
+    function toast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(()=>t.style.display='none', 2600);
+    }
+
+    function refreshAll(){
+      renderPopular();
+      renderClasses();
+      renderCalendar();
+      renderBookings();
+      renderPayments();
+      renderChallenges();
+      renderAdmin();
+      loadProfile();
+    }
+
+    refreshAll();
+  </script>
+</body>
+</html>
