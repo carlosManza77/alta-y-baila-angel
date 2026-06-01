@@ -662,27 +662,171 @@
       z-index:30;
     }
 
+
+
+    .skip-link{
+      position:absolute;
+      left:16px;
+      top:-80px;
+      background:#21102d;
+      color:white;
+      padding:10px 14px;
+      border-radius:12px;
+      z-index:100;
+      text-decoration:none;
+      font-weight:900;
+    }
+    .skip-link:focus{top:16px}
+
+    .mobile-bottom-nav,
+    .fab-reserve{display:none}
+
+    .card,.class-row,.list-item,.plan,.day{transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+    .card:hover,.class-row:hover,.plan:hover{transform:translateY(-2px);box-shadow:0 20px 42px rgba(124,58,237,.11)}
+
+    .empty-state{
+      text-align:center;
+      padding:24px;
+      border:1px dashed #e9c7df;
+      border-radius:22px;
+      background:#fffafd;
+      color:var(--muted);
+    }
+
+    .section-header-mobile{display:none}
+
     @media(max-width:1100px){
       .grid-4,.grid-3,.calendar,.filters{grid-template-columns:repeat(2,1fr)}
     }
 
     @media(max-width:920px){
+      body{padding-bottom:86px}
       .app{grid-template-columns:1fr}
-      .sidebar{position:sticky;top:0;z-index:10;border-radius:0 0 26px 26px}
-      .nav{display:grid;grid-template-columns:repeat(2,1fr)}
+      .sidebar{
+        position:relative;
+        top:auto;
+        z-index:1;
+        border-radius:0 0 26px 26px;
+        padding:16px 16px 14px;
+        gap:14px;
+      }
+      .sidebar .brand h1{font-size:18px}
+      .sidebar .brand p{font-size:12px}
+      .sidebar .logo{width:44px;height:44px;border-radius:15px;font-size:22px}
+      .nav{
+        display:flex;
+        flex-direction:row;
+        gap:8px;
+        overflow-x:auto;
+        padding-bottom:4px;
+        scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
+      }
+      .nav::-webkit-scrollbar{display:none}
+      .nav button{
+        flex:0 0 auto;
+        white-space:nowrap;
+        padding:11px 13px;
+        background:rgba(255,255,255,.08);
+        font-size:14px;
+      }
       .sidebar-card{display:none}
-      .login-card{grid-template-columns:1fr}
+      .login-card{grid-template-columns:1fr;border-radius:28px}
+      .login-form{padding:28px 22px}
       .login-hero{display:none}
-      .hero{grid-template-columns:1fr}
-      .topbar{flex-direction:column;align-items:flex-start}
+      .hero{grid-template-columns:1fr;padding:23px;border-radius:26px}
+      .hero h3{font-size:25px}
+      .topbar{
+        position:sticky;
+        top:0;
+        z-index:8;
+        margin:0 -20px 18px;
+        padding:12px 20px;
+        background:rgba(255,247,251,.88);
+        backdrop-filter:blur(16px);
+        border-bottom:1px solid rgba(240,221,234,.75);
+      }
+      .topbar h2{font-size:24px}
+      .topbar p{font-size:13px}
+      .user-pill{padding:8px 10px;font-size:13px}
       .grid-4,.grid-3,.grid-2,.calendar,.filters{grid-template-columns:1fr}
-      .class-row{grid-template-columns:56px 1fr}
-      .class-row > div:last-child{grid-column:1/-1}
+      .class-row{grid-template-columns:56px 1fr;padding:13px;border-radius:20px}
+      .class-row > div:last-child{grid-column:1/-1;justify-content:stretch}
+      .class-row > div:last-child .btn{flex:1}
+      .list-item{align-items:flex-start;flex-direction:column}
+      .list-item .btn{width:100%}
+      .day{min-height:auto}
       main{padding:20px}
+      .filters{gap:10px}
+      input,select,.btn{min-height:46px}
+      .toast{left:16px;right:16px;bottom:98px;text-align:center}
+      .modal-backdrop{align-items:flex-end;padding:0}
+      .modal{border-radius:26px 26px 0 0;max-height:86vh}
+      .mobile-bottom-nav{
+        position:fixed;
+        left:10px;right:10px;bottom:10px;
+        z-index:15;
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:4px;
+        padding:8px;
+        border-radius:24px;
+        background:rgba(33,16,45,.94);
+        backdrop-filter:blur(18px);
+        box-shadow:0 18px 50px rgba(33,16,45,.26);
+      }
+      .mobile-bottom-nav button{
+        border:0;
+        background:transparent;
+        color:#f5d0fe;
+        border-radius:17px;
+        padding:8px 4px;
+        font-size:11px;
+        font-weight:900;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:2px;
+      }
+      .mobile-bottom-nav button.active{background:rgba(255,255,255,.14);color:white}
+      .mobile-bottom-nav span{font-size:19px;line-height:1}
+      .fab-reserve{
+        display:flex;
+        position:fixed;
+        right:18px;
+        bottom:94px;
+        z-index:14;
+        border:0;
+        border-radius:999px;
+        padding:13px 16px;
+        background:linear-gradient(135deg,var(--pink),var(--purple));
+        color:white;
+        font-weight:1000;
+        box-shadow:0 18px 34px rgba(236,72,153,.33);
+      }
+    }
+
+    @media(max-width:480px){
+      .login-screen{padding:12px}
+      .login-card{border-radius:24px}
+      .topbar{align-items:flex-start;gap:10px}
+      .stat{padding:17px}
+      .stat-icon{width:46px;height:46px;border-radius:16px;font-size:22px}
+      .stat h4{font-size:22px}
+      .class-card{min-height:210px;padding:19px;border-radius:24px}
+      .class-card h3{font-size:24px}
+      .card{padding:18px;border-radius:22px}
+      .plan{padding:20px;border-radius:24px}
+      .price{font-size:32px}
+    }
+  
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#home">Saltar al contenido</a>
 
   <section id="loginScreen" class="login-screen">
     <div class="login-card">
@@ -799,11 +943,13 @@
       <section id="home" class="section active">
         <div class="hero">
           <div>
-            <h3>Hoy es buen día para saltar y bailar 🔥</h3>
-            <p>Reserva tus clases, controla tus bonos y vive la energía de Salta y Baila Ángel.</p>
+            <h3 id="welcomeTitle">Hoy es buen día para saltar y bailar 🔥</h3>
+            <p id="welcomeSubtitle">Reserva tus clases, controla tus bonos y vive la energía de Salta y Baila Ángel.</p>
           </div>
           <button class="btn btn-primary" onclick="showSectionById('classes')">Reservar ahora</button>
         </div>
+
+        <div id="nextBookingCard" class="card" style="margin-bottom:20px"></div>
 
         <div class="grid grid-4">
           <div class="card stat"><div class="stat-icon bg-pink">🎟️</div><div><h4 id="creditsStat">4</h4><p>Créditos disponibles</p></div></div>
@@ -1096,6 +1242,18 @@
     </main>
   </section>
 
+
+
+  <nav id="mobileBottomNav" class="mobile-bottom-nav" aria-label="Navegación móvil">
+    <button class="active" data-section="home" onclick="showSectionById('home')"><span>🏠</span>Inicio</button>
+    <button data-section="classes" onclick="showSectionById('classes')"><span>📅</span>Reservar</button>
+    <button data-section="myBookings" onclick="showSectionById('myBookings')"><span>✅</span>Reservas</button>
+    <button data-section="plans" onclick="showSectionById('plans')"><span>💳</span>Bonos</button>
+    <button data-section="profile" onclick="showSectionById('profile')"><span>👤</span>Perfil</button>
+  </nav>
+
+  <button id="fabReserve" class="fab-reserve" onclick="showSectionById('classes')">＋ Reservar</button>
+
   <div id="classModal" class="modal-backdrop" onclick="closeModal(event)">
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -1174,8 +1332,10 @@
       document.getElementById(id).classList.add('active');
       document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
       if(btn) btn.classList.add('active');
+      document.querySelectorAll('.mobile-bottom-nav button').forEach(b=>b.classList.toggle('active', b.dataset.section === id));
       document.getElementById('pageTitle').textContent = titles[id][0];
       document.getElementById('pageSubtitle').textContent = titles[id][1];
+      document.getElementById('fabReserve').style.display = id === 'classes' ? 'none' : '';
       refreshAll();
       window.scrollTo({top:0,behavior:'smooth'});
     }
@@ -1204,6 +1364,10 @@
         (!day || c.day === day)
       );
 
+      if(!rows.length){
+        document.getElementById('classesList').innerHTML = '<div class="empty-state">No hay clases con esos filtros. Prueba a cambiar el día, nivel o tipo de clase.</div>';
+        return;
+      }
       document.getElementById('classesList').innerHTML = rows.map(c => {
         const currentBooked = c.booked + bookings.filter(b=>b.classId===c.id && b.status==="Reservada").length;
         const full = currentBooked >= c.capacity;
@@ -1296,8 +1460,8 @@
     function bookClass(id){
       const c = classes.find(x=>x.id===id);
       const bookings = getBookings();
-      if(bookings.some(b=>b.classId===id && b.status==="Reservada")){
-        toast('Ya tienes esta clase reservada');
+      if(bookings.some(b=>b.classId===id && b.status!=="Cancelada")){
+        toast('Ya tienes una reserva o lista de espera para esta clase');
         closeModal();
         return;
       }
@@ -1337,12 +1501,13 @@
       const b = bookings.find(x=>x.id===id);
       if(!b) return;
       if(confirm('¿Cancelar esta reserva?')){
+        const previousStatus = b.status;
         b.status = "Cancelada";
-        if(b.status !== "Lista de espera") user.credits += 1;
+        if(previousStatus === "Reservada") user.credits += 1;
         setBookings(bookings);
         saveUser();
         refreshAll();
-        toast('Reserva cancelada');
+        toast(previousStatus === "Lista de espera" ? 'Salida de lista de espera' : 'Reserva cancelada y crédito devuelto');
       }
     }
 
@@ -1441,7 +1606,7 @@
 
       document.getElementById('adminTable').innerHTML = bookings.length ? bookings.map(b=>`
         <tr><td>${b.name}</td><td>${b.day}</td><td>${b.time}</td><td>${b.type === 'Kangoo' ? (b.bootSize || user.bootSize || 'No indicada') : '-'}</td><td>${b.createdAt ? new Date(b.createdAt).toLocaleString() : ''}</td><td>${b.status}</td></tr>
-      `).join('') : '<tr><td colspan="5">Sin reservas demo todavía.</td></tr>';
+      `).join('') : '<tr><td colspan="6">Sin reservas demo todavía.</td></tr>';
     }
 
     function quickClass(name){
@@ -1463,7 +1628,22 @@
       setTimeout(()=>t.style.display='none', 2600);
     }
 
+
+
+    function renderHomeSummary(){
+      document.getElementById('welcomeTitle').textContent = `Hola ${user.name?.split(' ')[0] || 'alumna'} 👋`;
+      document.getElementById('welcomeSubtitle').textContent = 'Tu resumen rápido: próxima clase, créditos, puntos y acceso directo a reservar.';
+      const next = getBookings().find(b=>b.status==="Reservada");
+      const card = document.getElementById('nextBookingCard');
+      if(next){
+        card.innerHTML = `<h3>Tu próxima clase</h3><div class="list-item"><div><strong>${next.type==='Zumba'?'💃':'🦘'} ${next.name}</strong><br><span style="color:var(--muted)">${next.day} · ${next.time} · ${next.coach}</span></div><span class="tag green">Confirmada</span></div>`;
+      }else{
+        card.innerHTML = `<h3>Tu próxima clase</h3><div class="empty-state">Aún no tienes ninguna clase reservada. Elige una clase y asegura tu plaza en un toque.<br><br><button class="btn btn-primary" onclick="showSectionById('classes')">Reservar clase</button></div>`;
+      }
+    }
+
     function refreshAll(){
+      renderHomeSummary();
       renderPopular();
       renderClasses();
       renderCalendar();
